@@ -210,7 +210,7 @@ We need just only CSS in this tutorial.
 
 ```
 npm install --save react-router-dom
-touch src/Article.js
+touch src/Articles.js
 ```
 
 create `src/Article.js`
