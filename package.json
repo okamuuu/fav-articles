@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.15.3",
+    "bootstrap": "^3.3.7",
     "faker": "^4.1.0",
     "parse-link-header": "^0.4.1",
     "react": "^15.4.2",
