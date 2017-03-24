@@ -241,7 +241,7 @@ class FavoriteList extends Component {
     return (
       <div>
         <h2>Favorite Articles</h2>
-	  </div>
+      </div>
     )
   }
 }
