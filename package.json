@@ -6,9 +6,11 @@
     "axios": "^0.15.3",
     "bootstrap": "^3.3.7",
     "faker": "^4.1.0",
+    "immutable": "^3.8.1",
     "parse-link-header": "^0.4.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-icons": "^2.2.3",
     "react-router-dom": "^4.0.0"
   },
   "devDependencies": {

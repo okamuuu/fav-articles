@@ -1,9 +1,15 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 
+import FaStar from 'react-icons/lib/fa/star'
+import immutable from 'immutable'
+
 import Api from './Api'
 
 const api = new Api(`http://127.0.0.1:4000`)
+
+const FavoriteButton = ({isFavorite, onClick}) => (
+  <FaStar style={{cursor: "pointer"}} color={isFavorite ? "#ffa500" : "#eee"} onClick={onClick} />)
 
 class List extends Component {
 
@@ -18,6 +24,15 @@ class List extends Component {
     })
   }
 
+  handleFavorite(article, index) {
+    article.isFavorite = article.isFavorite !== true
+    api.updateArticle(article.id, article).then((result) => {
+      const nextArticles = immutable.List(this.state.articles)
+      nextArticles[index] = result.article
+      this.setState({articles: nextArticles})
+    })
+  }
+
   render() {
     return (
       <div>
@@ -26,6 +41,8 @@ class List extends Component {
           {this.state.articles.map((x, index) => (
             <li key={index}>
               <Link to={`/articles/${x.id}`}>{x.title}</Link>
+              {" "}
+              <FavoriteButton isFavorite={x.isFavorite} onClick={() => this.handleFavorite(x, index)} />
             </li>
           ))}
         </ul>
@@ -36,10 +53,29 @@ class List extends Component {
 
 class FavoriteList extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = { articles: [] }
+  }
+
+  componentWillMount() {
+    api.listFavoriteArticles().then((result) => {
+      this.setState({articles: result.articles})
+    })
+  }
+
   render() {
+
+    const {articles} = this.state
+
     return (
       <div>
-        <h2>Favorite Articles</h2>
+        <h2>Favorites</h2>
+        <ul>
+        {this.state.articles.map((x, index) => (
+          <li key={index}><Link to={`/articles/${x.id}`}>{x.title}</Link></li>
+        ))}
+        </ul>
       </div>
     )
   }
