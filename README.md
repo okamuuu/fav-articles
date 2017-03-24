@@ -524,7 +524,7 @@ npm install --save react-paginators
 
 edit `src/Articles.js`
 
-```
+```diff
 diff --git a/src/Articles.js b/src/Articles.js
 index 402ed67..dc68871 100644
 --- a/src/Articles.js
