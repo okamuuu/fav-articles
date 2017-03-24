@@ -52,7 +52,7 @@ function getArticles() {
       "id": id,
       "title": faker.lorem.words(),
       "description": faker.lorem.paragraphs(),
-	  "isFavorite": false
+      "isFavorite": false
     })
   }
 
