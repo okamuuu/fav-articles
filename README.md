@@ -526,7 +526,7 @@ edit `src/Articles.js`
 
 ```diff
 diff --git a/src/Articles.js b/src/Articles.js
-index 402ed67..dc68871 100644
+index 0b97cbd..6c87c01 100644
 --- a/src/Articles.js
 +++ b/src/Articles.js
 @@ -5,6 +5,7 @@ import FaStar from 'react-icons/lib/fa/star'
@@ -537,25 +537,16 @@ index 402ed67..dc68871 100644
  
  const api = new Api(`http://127.0.0.1:4000`)
  
-@@ -27,13 +28,23 @@ class List extends Component {
-   handleFavorite(article, index) {
-     article.isFavorite = article.isFavorite !== true
-     api.updateArticle(article.id, article).then((result) => {
--      const newArticles = this.state.articles
--      newArticles[index] = result.article
--      this.setState({articles: newArticles})
-+      const nextArticles = immutable.List(this.state.articles)
-+      nextArticles[index] = result.article
-+      this.setState({articles: nextArticles})
-+    })
-+  }
-+
-+  handlePageClick(page) {
-+    api.listArticles(page).then((result) => {
-+       this.setState({articles: result.articles, current: page, last: result.links.last._page})
+@@ -33,7 +34,17 @@ class List extends Component {
      })
    }
  
++  handlePageClick(page) {
++    api.listArticles(page).then((result) => {
++       this.setState({articles: result.articles, current: page, last: result.links.last._page})
++    })
++  }
++
    render() {
 +
 +    const current = this.state && this.state.current || 1
@@ -580,6 +571,10 @@ index 402ed67..dc68871 100644
        </div>
      )
    }
+@@ -107,3 +127,4 @@ class Show extends Component {
+ }
+ 
+ export default { List, FavoriteList, Show }
 ```
 
 Let's run the app. Do `npm start` and `open http://localhost:3000`. 
