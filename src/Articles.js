@@ -5,6 +5,7 @@ import FaStar from 'react-icons/lib/fa/star'
 import immutable from 'immutable'
 
 import Api from './Api'
+import { Bootstrap3ishPaginator } from 'react-paginators'
 
 const api = new Api(`http://127.0.0.1:4000`)
 
@@ -33,7 +34,17 @@ class List extends Component {
     })
   }
 
+  handlePageClick(page) {
+    api.listArticles(page).then((result) => {
+       this.setState({articles: result.articles, current: page, last: result.links.last._page})
+    })
+  }
+
   render() {
+
+    const current = this.state && this.state.current || 1
+    const last = this.state && parseInt(this.state.last, 10) || 1
+
     return (
       <div>
         <h2>Articles</h2>
@@ -46,6 +57,15 @@ class List extends Component {
             </li>
           ))}
         </ul>
+
+        <div style={{padding: "30px",  display: "flex", justifyContent: "center" }}>
+          <Bootstrap3ishPaginator
+            current={current}
+            last={last}
+            maxPageCount={10}
+            onClick={this.handlePageClick.bind(this)}
+          />
+        </div>
       </div>
     )
   }
@@ -107,3 +127,4 @@ class Show extends Component {
 }
 
 export default { List, FavoriteList, Show }
+
