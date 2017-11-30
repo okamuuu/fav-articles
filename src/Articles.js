@@ -7,7 +7,7 @@ import immutable from 'immutable'
 import Api from './Api'
 import { Bootstrap3ishPaginator } from 'react-paginators'
 
-const api = new Api(`http://127.0.0.1:4000`)
+const api = new Api(process.env.NODE_ENV === "production" ? "/" : `http://127.0.0.1:4000`)
 
 const FavoriteButton = ({isFavorite, onClick}) => (
   <FaStar style={{cursor: "pointer"}} color={isFavorite ? "#ffa500" : "#eee"} onClick={onClick} />)
