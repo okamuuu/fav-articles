@@ -16,9 +16,9 @@ const router = jsonServer.router(getArticles())
 
 // server.use(rewriter)
 server.use('/api/', router)
-server.use('/static', express.static(__dirname + '/build/static'))
+server.use('/static', express.static(__dirname + '/dist/static'))
 server.get('*', function (req, res, next) {
-  res.sendFile(path.join(__dirname + '/build/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
 
