@@ -19,7 +19,7 @@
     "react-scripts": "0.9.5"
   },
   "scripts": {
-    "start": "npm run build && npm run serve",
+    "start": "npm run serve",
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
